@@ -89,7 +89,10 @@ export default function ScreensaverPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-surface relative overflow-hidden">
+    <main
+      className="min-h-screen flex flex-col bg-surface relative overflow-hidden"
+      style={{ cursor: showControls ? "default" : "none" }}
+    >
       {/* Slide */}
       <div className={`flex-1 flex transition-opacity ${settings.transition === "crossfade" ? "duration-1000" : "duration-0"}`}>
         <SlideView celebrity={current} photoBaseUrl={R2_BASE} showFact={settings.showFacts} />

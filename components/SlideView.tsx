@@ -6,9 +6,10 @@ interface SlideViewProps {
   celebrity: Celebrity;
   photoBaseUrl: string;
   showFact: boolean;
+  colorMode?: boolean;
 }
 
-export default function SlideView({ celebrity, photoBaseUrl, showFact }: SlideViewProps) {
+export default function SlideView({ celebrity, photoBaseUrl, showFact, colorMode }: SlideViewProps) {
   const photoUrl = `${photoBaseUrl}/photos/${celebrity.photo_key}`;
 
   return (
@@ -18,13 +19,13 @@ export default function SlideView({ celebrity, photoBaseUrl, showFact }: SlideVi
           <img
             src={photoUrl}
             alt={celebrity.name}
-            className="w-full h-full object-cover photo-filter"
+            className={`w-full h-full object-cover ${colorMode ? "" : "photo-filter"}`}
           />
           <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black via-black/40 to-transparent">
             <h2 className="font-headline font-black text-4xl md:text-5xl text-white tracking-tighter leading-[0.85] mb-2">
               {celebrity.name.toUpperCase()}
             </h2>
-            {showFact && (
+            {showFact && celebrity.hint_2 && (
               <p className="font-body text-sm text-on-surface-variant font-light leading-relaxed max-w-[90%]">
                 {celebrity.hint_2}
               </p>

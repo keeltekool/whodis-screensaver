@@ -6,6 +6,7 @@ interface SettingsPanelProps {
   settings: ScreensaverSettings;
   onUpdate: (patch: Partial<ScreensaverSettings>) => void;
   onClose: () => void;
+  disableFacts?: boolean;
 }
 
 const ALL_CATEGORIES = ["FILM", "MUSIC", "ATHLETE"];
@@ -16,7 +17,7 @@ const TRANSITIONS: { value: TransitionStyle; label: string }[] = [
   { value: "cut", label: "Hard Cut" },
 ];
 
-export default function SettingsPanel({ settings, onUpdate, onClose }: SettingsPanelProps) {
+export default function SettingsPanel({ settings, onUpdate, onClose, disableFacts }: SettingsPanelProps) {
   function toggleInArray(arr: string[], value: string): string[] {
     return arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
   }
@@ -126,12 +127,15 @@ export default function SettingsPanel({ settings, onUpdate, onClose }: SettingsP
               className="accent-primary-fixed-dim w-5 h-5"
             />
           </label>
-          <label className="flex items-center justify-between cursor-pointer">
-            <span className="font-label text-xs uppercase tracking-wider text-on-surface-variant">Show Facts</span>
+          <label className={`flex items-center justify-between ${disableFacts ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}>
+            <span className="font-label text-xs uppercase tracking-wider text-on-surface-variant">
+              Show Facts{disableFacts ? " (not available)" : ""}
+            </span>
             <input
               type="checkbox"
-              checked={settings.showFacts}
-              onChange={() => onUpdate({ showFacts: !settings.showFacts })}
+              checked={disableFacts ? false : settings.showFacts}
+              onChange={() => !disableFacts && onUpdate({ showFacts: !settings.showFacts })}
+              disabled={disableFacts}
               className="accent-primary-fixed-dim w-5 h-5"
             />
           </label>

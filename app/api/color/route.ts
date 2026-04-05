@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const sql = getDb();
     const celebrities = await sql`
-      SELECT id, name, category, era, photo_key
+      SELECT id, name, category, era, hint_2, photo_key
       FROM celebrities
       WHERE active = true AND photo_type = 'color'
       ORDER BY name
