@@ -51,11 +51,11 @@ export default function HubPage() {
             href="/screensaver"
           />
           <ExperienceCard
-            label="WHO DIS? — ???"
-            title="???"
-            description="Something's coming. We're not done with these legends yet."
-            ctaText="COMING SOON"
-            disabled
+            label="WHO DIS? — IN COLOR"
+            title="IN COLOR"
+            description="Not everything was black and white. The rare color shots — vivid, unfiltered, alive. Same legends, different light. A chromatic trip through the decades."
+            ctaText="VIEW GALLERY →"
+            href="/gallery"
           />
         </div>
       </section>
