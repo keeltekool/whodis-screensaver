@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* === WHO DIS? Neo-Noir Design System === */
+
+@theme {
+  /* Reset defaults */
+  --color-*: initial;
+  --radius-*: initial;
+
+  /* Core palette from DESIGN.md */
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #393939;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353534;
+  --color-surface-variant: #353534;
+  --color-surface-tint: #ffba20;
+
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #d5c4ab;
+  --color-on-background: #e5e2e1;
+  --color-inverse-surface: #e5e2e1;
+  --color-inverse-on-surface: #313030;
+
+  --color-primary: #ffdca1;
+  --color-primary-fixed-dim: #ffba20;
+  --color-primary-container: #ffb800;
+  --color-on-primary: #412d00;
+  --color-on-primary-container: #6b4c00;
+  --color-inverse-primary: #7c5800;
+
+  --color-secondary: #c8c8b0;
+  --color-secondary-container: #494a38;
+  --color-on-secondary: #303221;
+  --color-on-secondary-container: #b9baa3;
+
+  --color-tertiary: #ffd8ce;
+  --color-tertiary-container: #ffb29d;
+  --color-on-tertiary: #601400;
+  --color-on-tertiary-container: #9a2600;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  --color-outline: #9e8f78;
+  --color-outline-variant: #514532;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  /* 0px border-radius everywhere — design system signature */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  /* Fonts */
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+}
+
+/* Grain texture overlay */
+.grain-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Gallery matte frame */
+.photo-matte {
+  background: var(--color-surface-container-lowest);
+  padding: 16px;
+}
+
+/* Photo filter — B&W high contrast */
+.photo-filter {
+  filter: grayscale(100%) contrast(125%) brightness(90%);
+}
+
+/* Selection colors */
+::selection {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary);
+}
+
+/* Photo carousel — infinite horizontal scroll */
+@keyframes carousel-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-carousel {
+  animation: carousel-scroll 60s linear infinite;
 }
