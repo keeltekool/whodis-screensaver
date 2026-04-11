@@ -1,0 +1,106 @@
+import { readFileSync, writeFileSync } from "fs";
+
+const existing = JSON.parse(readFileSync("content/deathmatch-matchups.json", "utf-8"));
+
+const batch3 = [
+  {
+    slug: "eazy-e-vs-ice-cube",
+    fighter_a_name: "Eazy-E",
+    fighter_b_name: "Ice Cube",
+    fighter_a_nickname: "The Godfather of Gangsta Rap",
+    fighter_b_nickname: "The West Coast Don",
+    tagline: "N.W.A. Civil War",
+    matchup_type: "rivalry",
+    difficulty: 2,
+    rounds: [
+      { round_number: 1, round_label: "THE MONEY", question_text: "One of them funded a record label with drug money \u2014 reportedly investing $6,000 to $10,000 from dealing crack cocaine in Compton. Which one?", correct_answer: "a", explanation: "Eazy-E founded Ruthless Records in 1987 with money earned from drug dealing. By age 22, he had allegedly earned as much as $250,000 from selling drugs before deciding music was a better path.", fun_fact: "His cousin being shot and killed was the turning point that pushed him from the streets into the studio." },
+      { round_number: 2, round_label: "THE PEN", question_text: "One of them wrote most of N.W.A.'s lyrics \u2014 including \"Straight Outta Compton\" and \"Fuck tha Police.\" Which one?", correct_answer: "b", explanation: "Ice Cube was N.W.A.'s primary lyricist. He wrote the majority of the group's debut album Straight Outta Compton, the landmark record that defined West Coast gangsta rap.", fun_fact: "When he left N.W.A., the group lost its main writer. Dr. Dre departed not long after." },
+      { round_number: 3, round_label: "THE DISS", question_text: "One of them released \"No Vaseline\" \u2014 widely considered the greatest diss track in hip-hop history. Which one?", correct_answer: "b", explanation: "Ice Cube released \"No Vaseline\" in 1991 on his album Death Certificate, attacking Eazy-E and manager Jerry Heller for exploiting N.W.A. financially. The group never responded.", fun_fact: "After the track dropped, N.W.A. effectively dissolved. Dr. Dre left citing the same financial complaints." },
+      { round_number: 4, round_label: "THE SCREEN", question_text: "One of them co-wrote and starred in the 1995 comedy Friday, launching a major acting career with nearly 40 films. Which one?", correct_answer: "b", explanation: "Ice Cube co-wrote Friday with DJ Pooh and starred as Craig Jones. The film launched a franchise and transformed him from gangsta rapper to comedic actor and producer.", fun_fact: "He was 26 when Friday came out. He went on to star in the Barbershop and Are We There Yet? franchises." },
+      { round_number: 5, round_label: "THE LABEL", question_text: "One of them was the sole owner of Ruthless Records \u2014 a label that launched N.W.A., Bone Thugs-N-Harmony, and Above the Law. Which one?", correct_answer: "a", explanation: "Eazy-E owned Ruthless Records outright, with Jerry Heller as his business partner/manager. The label was one of the most important in hip-hop history.", fun_fact: "At its peak, Ruthless was generating $10 million a month in revenue." },
+      { round_number: 6, round_label: "THE VOICE", question_text: "One of them had a distinctive high-pitched nasal voice that became the most recognizable sound in gangsta rap \u2014 despite having almost no formal musical training. Which one?", correct_answer: "a", explanation: "Eazy-E's raspy, high-pitched delivery was instantly recognizable and completely self-taught. He had no musical background before Dr. Dre and Ice Cube brought him into the studio.", fun_fact: "Dr. Dre reportedly had to coach him through his first recordings line by line." },
+      { round_number: 7, round_label: "THE END", question_text: "One of them died of AIDS-related complications at age 30 \u2014 just one month after being diagnosed. Which one?", correct_answer: "a", explanation: "Eazy-E was diagnosed with HIV in February 1995 and died on March 26, 1995. His rapid decline shocked the hip-hop world and brought mainstream attention to AIDS awareness.", fun_fact: "On his deathbed, he reconciled with Ice Cube and Dr. Dre. The beef died with him." }
+    ]
+  },
+  {
+    slug: "diana-ross-vs-whitney-houston",
+    fighter_a_name: "Diana Ross",
+    fighter_b_name: "Whitney Houston",
+    fighter_a_nickname: "Miss Ross",
+    fighter_b_nickname: "The Voice",
+    tagline: "Diva Decades: Motown vs Pop",
+    matchup_type: "era",
+    difficulty: 2,
+    rounds: [
+      { round_number: 1, round_label: "THE GROUP", question_text: "One of them led a trio from Detroit that became Motown's most successful act \u2014 with 12 number-one singles on the Billboard Hot 100. Which one?", correct_answer: "a", explanation: "Diana Ross led The Supremes, the most commercially successful Motown group ever. Their 12 number-one hits include \"Where Did Our Love Go,\" \"Stop! In the Name of Love,\" and \"You Can't Hurry Love.\"", fun_fact: "Combining her Supremes and solo hits, Ross has 18 number-one singles \u2014 the most for any female artist in US chart history." },
+      { round_number: 2, round_label: "THE STREAK", question_text: "One of them had seven consecutive number-one singles on the Billboard Hot 100 \u2014 a record no other artist has ever matched. Which one?", correct_answer: "b", explanation: "Whitney Houston's first seven singles all reached number one, from \"Saving All My Love for You\" (1985) through \"Where Do Broken Hearts Go\" (1988). No artist before or since has done this.", fun_fact: "Her label initially worried that her music was \"too pop\" for Black radio and \"too Black\" for pop radio. She conquered both." },
+      { round_number: 3, round_label: "THE FILM", question_text: "One of them played Billie Holiday in a 1972 biographical film and was nominated for an Academy Award for Best Actress. Which one?", correct_answer: "a", explanation: "Diana Ross starred in Lady Sings the Blues (1972) as jazz legend Billie Holiday. She received an Oscar nomination for Best Actress in her film debut.", fun_fact: "The soundtrack album went to number one on the Billboard chart. Ross did her own singing throughout the film." },
+      { round_number: 4, round_label: "THE SOUNDTRACK", question_text: "One of them starred in a 1992 film whose soundtrack became the best-selling movie soundtrack of all time \u2014 over 45 million copies sold. Which one?", correct_answer: "b", explanation: "Whitney Houston starred in The Bodyguard (1992) alongside Kevin Costner. The soundtrack sold over 45 million copies worldwide, anchored by her cover of \"I Will Always Love You.\"", fun_fact: "\"I Will Always Love You\" was originally written and recorded by Dolly Parton in 1973. Houston's version spent 14 weeks at number one." },
+      { round_number: 5, round_label: "THE COVER", question_text: "One of them recorded a cover of another artist's song that became the best-selling physical single by a woman in US history. Which one?", correct_answer: "b", explanation: "Whitney Houston's version of Dolly Parton's \"I Will Always Love You\" was certified Diamond by the RIAA. It remains the best-selling physical single by a female artist in the United States.", fun_fact: "Parton later said: \"When Whitney did my song, I got enough money to buy Dollywood.\"" },
+      { round_number: 6, round_label: "THE EMPIRE", question_text: "One of them was named the most successful female artist in UK chart history, based on a career tally spanning solo work and group hits. Which one?", correct_answer: "a", explanation: "In 1999, Diana Ross was officially named the most successful female chart artist in UK history, based on combined chart performance across The Supremes and her solo career.", fun_fact: "She has been performing for over 60 years. Her career spans from Motown in the 1960s to sold-out arena tours in the 2020s." },
+      { round_number: 7, round_label: "THE DECADE", question_text: "One of them was honored at the Soul Train Music Awards as the female artist of the 1990s. Which one?", correct_answer: "b", explanation: "Whitney Houston received the special honor at the 14th Soul Train Music Awards in March 2000, recognized as the defining female artist of the entire decade.", fun_fact: "She sold over 200 million records worldwide. Only Madonna has sold more among female artists." }
+    ]
+  },
+  {
+    slug: "escobar-vs-hefner",
+    fighter_a_name: "Pablo Escobar",
+    fighter_b_name: "Hugh Hefner",
+    fighter_a_nickname: "El Patr\u00f3n",
+    fighter_b_nickname: "Hef",
+    tagline: "Empire Builders: Vice Edition",
+    matchup_type: "crossover",
+    difficulty: 3,
+    rounds: [
+      { round_number: 1, round_label: "THE LIST", question_text: "One of them appeared on the Forbes list of the world's richest people for seven consecutive years \u2014 with an estimated fortune of $30 billion at peak. Which one?", correct_answer: "a", explanation: "Pablo Escobar was listed by Forbes from 1987 to 1993. In 1989, he was ranked 20th richest in the world with a reported $3 billion \u2014 though his son later said the real number was far higher.", fun_fact: "At his peak, the Medell\u00edn Cartel supplied an estimated 80% of the world's cocaine." },
+      { round_number: 2, round_label: "THE FIRST ISSUE", question_text: "One of them launched his empire with a magazine whose first issue featured Marilyn Monroe on the cover \u2014 despite never having met her or paid her for the photos. Which one?", correct_answer: "b", explanation: "Hugh Hefner launched Playboy in December 1953 with Monroe on the cover. He paid $500 for nude photos that had been taken years earlier. Monroe never consented to their use in his magazine.", fun_fact: "The first issue sold over 50,000 copies at 50 cents each. Hefner was so unsure of success that he didn't even put a date on it." },
+      { round_number: 3, round_label: "THE CASH", question_text: "One of them reportedly burned $2 million in cash to keep his daughter warm when she had hypothermia while the family was on the run. Which one?", correct_answer: "a", explanation: "According to Escobar's son Sebasti\u00e1n Marroqu\u00edn, his father burned approximately $2 million in banknotes to make a fire when his daughter Manuela was suffering from hypothermia in a mountain hideout.", fun_fact: "The Medell\u00edn Cartel reportedly spent $2,500 per month just on rubber bands to wrap their cash." },
+      { round_number: 4, round_label: "THE MANSION", question_text: "One of them lived in a 22,000-square-foot Gothic mansion with a zoo, a grotto, and a legendary pool that became the most famous party house in America. Which one?", correct_answer: "b", explanation: "Hugh Hefner bought the Playboy Mansion in Los Angeles in 1971 for $1 million. It featured 29 rooms, a famous grotto, and became the world's most notorious party venue. It sold for $100 million in 2016.", fun_fact: "He lived there until his death in 2017, age 91. The sale condition was that he could keep living there." },
+      { round_number: 5, round_label: "THE ZOO", question_text: "One of them built a private estate with a zoo that included hippos, elephants, and giraffes imported illegally from Africa. The hippos escaped and now roam Colombia. Which one?", correct_answer: "a", explanation: "Escobar's Hacienda N\u00e1poles estate included an exotic zoo. After his death, the hippos were left behind and bred. Colombia now has over 100 feral hippos \u2014 the largest population outside Africa.", fun_fact: "They are considered an invasive species and a major ecological problem. Nobody knows how to deal with them." },
+      { round_number: 6, round_label: "THE BRAND", question_text: "One of them created a brand so iconic that the bunny logo became one of the most recognized symbols in the world. Which one?", correct_answer: "b", explanation: "The Playboy bunny logo, designed by art director Art Paul in 1953, became one of the most famous brand symbols globally. It has been printed on everything from jewelry to jet planes.", fun_fact: "Hefner chose a rabbit because he thought the bunny had a \"humorous sexual connotation.\"" },
+      { round_number: 7, round_label: "THE END", question_text: "One of them was killed in a rooftop shootout with police at age 44, ending a manhunt that involved the DEA, Colombian military, and a vigilante group. Which one?", correct_answer: "a", explanation: "Pablo Escobar was shot and killed on December 2, 1993, on a rooftop in the Los Olivos neighborhood of Medell\u00edn. He was 44 years old. The Search Bloc, a special unit backed by the US, tracked him via a phone call to his son.", fun_fact: "His grave in Medell\u00edn remains one of the most visited sites in Colombia. Flowers are left daily." }
+    ]
+  },
+  {
+    slug: "van-damme-vs-lundgren",
+    fighter_a_name: "Jean-Claude Van Damme",
+    fighter_b_name: "Dolph Lundgren",
+    fighter_a_nickname: "The Muscles from Brussels",
+    fighter_b_nickname: "The Brain",
+    tagline: "Universal Soldier: Who's the Real One?",
+    matchup_type: "franchise",
+    difficulty: 2,
+    rounds: [
+      { round_number: 1, round_label: "THE SPLIT", question_text: "One of them performed a split between two reversing Volvo trucks in a 2013 commercial that became one of the most-watched ads in YouTube history. Which one?", correct_answer: "a", explanation: "Van Damme performed \"The Epic Split\" for Volvo Trucks, filmed in a single take at an airport in Spain at sunrise. The ad demonstrated the precision of Volvo's Dynamic Steering system.", fun_fact: "The video has been viewed over 100 million times. It was filmed with no wires or CGI \u2014 the split is real." },
+      { round_number: 2, round_label: "THE DEGREE", question_text: "One of them holds a master's degree in chemical engineering and was awarded a Fulbright Scholarship to MIT \u2014 which he quit after two weeks to pursue acting. Which one?", correct_answer: "b", explanation: "Dolph Lundgren earned a chemical engineering degree from KTH Royal Institute of Technology in Sweden and a master's from the University of Sydney. He was awarded a Fulbright to MIT in 1983 but left for Hollywood.", fun_fact: "He speaks five languages: Swedish, English, German, French, and some Japanese and Spanish." },
+      { round_number: 3, round_label: "THE TAXI", question_text: "One of them drove a taxi and delivered pizzas in Hollywood while trying to break into acting. Which one?", correct_answer: "a", explanation: "Van Damme moved to Los Angeles in 1982 with little money and no English. He worked as a limo driver, pizza delivery man, carpet layer, and bouncer while hunting for his break.", fun_fact: "He famously stalked producer Menahem Golan outside a restaurant and performed a spinning kick to get his attention. It worked \u2014 Golan cast him in Bloodsport." },
+      { round_number: 4, round_label: "THE DRAGO", question_text: "One of them played Ivan Drago in Rocky IV \u2014 a Soviet boxer so terrifying that Sylvester Stallone was hospitalized after a real punch during filming. Which one?", correct_answer: "b", explanation: "Dolph Lundgren played Captain Ivan Drago in Rocky IV (1985). Stallone asked Lundgren to hit him for real during filming. The punch was so hard that Stallone spent four days in intensive care with a swollen pericardium.", fun_fact: "Lundgren's line \"I must break you\" became one of the most quoted lines in 80s action cinema." },
+      { round_number: 5, round_label: "THE COMEBACK", question_text: "One of them starred in JCVD (2008) \u2014 a critically acclaimed semi-autobiographical film where he played a washed-up version of himself and delivered a six-minute monologue about his failed career. Which one?", correct_answer: "a", explanation: "Van Damme starred in JCVD, a Belgian-French film where he plays a fictionalized version of himself \u2014 broke, divorced, and stuck in a hostage situation. His raw, tearful monologue earned him the best reviews of his career.", fun_fact: "Critics called it \"revelatory.\" Roger Ebert wrote: \"Who would have guessed Van Damme could act?\"" },
+      { round_number: 6, round_label: "THE BODYGUARD", question_text: "Before acting, one of them worked as Grace Jones's personal bodyguard and bouncer \u2014 and briefly dated her. Which one?", correct_answer: "b", explanation: "Dolph Lundgren was Grace Jones's bodyguard and boyfriend before breaking into film. She introduced him to the world of entertainment and helped him get the audition for Rocky IV.", fun_fact: "Their relationship was well-documented by paparazzi. Andy Warhol photographed them together at Studio 54." },
+      { round_number: 7, round_label: "THE SOLDIER", question_text: "They co-starred in Universal Soldier (1992). One of them played the hero, the other the villain. Who was the villain?", correct_answer: "b", explanation: "Dolph Lundgren played Sergeant Andrew Scott, the psychopathic villain, while Van Damme played the hero Luc Deveraux. The film spawned multiple sequels pairing them again.", fun_fact: "Reportedly, real tension existed between them during filming. Both men were competitive about who got more screen time." }
+    ]
+  },
+  {
+    slug: "jagger-vs-stewart",
+    fighter_a_name: "Mick Jagger",
+    fighter_b_name: "Rod Stewart",
+    fighter_a_nickname: "The Lips",
+    fighter_b_nickname: "Rod the Mod",
+    tagline: "British Rock Strutters",
+    matchup_type: "rivalry",
+    difficulty: 2,
+    rounds: [
+      { round_number: 1, round_label: "THE BAND", question_text: "One of them has fronted the same band for over 60 years \u2014 a group often called \"the greatest rock and roll band in the world.\" Which one?", correct_answer: "a", explanation: "Mick Jagger has been the lead singer of The Rolling Stones since 1962. The band's career spans over six decades with no permanent frontman change.", fun_fact: "Rod Stewart was briefly in The Faces with Ronnie Wood \u2014 who later joined The Rolling Stones." },
+      { round_number: 2, round_label: "THE TRAINS", question_text: "One of them spent 23 years building an elaborate model railway in his attic \u2014 a hobby he used to hide because he found it embarrassing. Which one?", correct_answer: "b", explanation: "Rod Stewart built a massive model railway called 'Grand Street and Three Rivers City,' set in 1940s America. He worked on it for 23 years and up to 5 hours a day, even booking extra hotel rooms on tour for his model work.", fun_fact: "He finally revealed it in Railway Modeller magazine. He said: \"I'm no longer embarrassed. I'm proud of it.\"" },
+      { round_number: 3, round_label: "THE KNIGHT", question_text: "Both were knighted. One became Sir in 2003, the other in 2016. Who was knighted first?", correct_answer: "a", explanation: "Mick Jagger was knighted in December 2003 by Prince Charles for services to popular music. Rod Stewart was knighted in October 2016 by Prince William.", fun_fact: "Keith Richards was furious about Jagger's knighthood, calling it \"ludicrous to take one of those gongs from the Establishment.\"" },
+      { round_number: 4, round_label: "THE QUESTION", question_text: "One of them had a worldwide hit asking \"Da Ya Think I'm Sexy?\" \u2014 a song that hit #1 in the US and UK. Which one?", correct_answer: "b", explanation: "Rod Stewart released \"Da Ya Think I'm Sexy?\" in 1978. It spent four weeks at #1 on the Billboard Hot 100 and became one of the defining disco-era crossover hits.", fun_fact: "He was accused of plagiarizing a Jorge Ben song. He ended up donating all royalties to UNICEF." },
+      { round_number: 5, round_label: "THE FAMILY", question_text: "One of them has fathered eight children with five different women. Which one?", correct_answer: "a", explanation: "Mick Jagger has eight children with five women, spanning from his eldest Karis (born 1970) to his youngest Deveraux (born 2016, when Jagger was 73).", fun_fact: "Rod Stewart also has eight children \u2014 with five women. They're matched on this stat." },
+      { round_number: 6, round_label: "THE SALES", question_text: "One of them has sold an estimated 250 million records with his band alone \u2014 not counting solo work. Which one?", correct_answer: "a", explanation: "The Rolling Stones have sold an estimated 200-250 million records worldwide, making them one of the best-selling music artists of all time. This doesn't include Jagger's solo work.", fun_fact: "Rod Stewart has sold around 120 million records total \u2014 combining solo and Faces work." },
+      { round_number: 7, round_label: "THE VOICE", question_text: "One of them publicly claimed to be the better singer, saying: \"Mick's a fine blues singer, but technically not as good as me.\" Who said it?", correct_answer: "b", explanation: "Rod Stewart made this claim in interviews, positioning himself as the superior vocalist. The two have maintained a friendly rivalry for decades, often trading barbs in the press.", fun_fact: "Jagger once invited Stewart to a party that Stewart later described in interviews with considerable detail. Their friendship has outlasted most of their marriages." }
+    ]
+  }
+];
+
+const combined = [...existing, ...batch3];
+writeFileSync("content/deathmatch-matchups.json", JSON.stringify(combined, null, 2));
+console.log(`Total matchups: ${combined.length}`);
+console.log("Added:", batch3.map(m => m.slug).join(", "));

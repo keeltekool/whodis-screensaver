@@ -32,9 +32,9 @@ export default function HubPage() {
       {/* EXPERIENCES — The Gateway */}
       <section className="px-8 pb-16 max-w-5xl mx-auto w-full">
         <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
-          Three Ways In
+          Four Ways In
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ExperienceCard
             label="WHO DIS? — THE GAME"
             title="THE GAME"
@@ -57,7 +57,28 @@ export default function HubPage() {
             ctaText="VIEW GALLERY →"
             href="/gallery"
           />
+          <ExperienceCard
+            label="WHO DIS? — DEATHMATCH"
+            title="DEATHMATCH"
+            description="Two legends. Seven rounds. Pick your answer and your knowledge decides who walks away standing. 30 showdowns. No refs. No mercy."
+            ctaText="FIGHT →"
+            href="/deathmatch"
+          />
         </div>
+      </section>
+
+      {/* THE VAULT — Master Collection */}
+      <section className="px-8 pb-16 max-w-5xl mx-auto w-full">
+        <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
+          The Vault
+        </h2>
+        <ExperienceCard
+          label="WHO DIS? — THE MASTER COLLECTION"
+          title="EVERYTHING"
+          description="Every frame. Every legend. Every reject, deep cut, and mood shot that didn't make the game. The ones you know. The ones you forgot. The ones nobody asked about. All of it — black and white, color, raw — rolling on a loop with zero apologies."
+          ctaText="ENTER →"
+          href="/master"
+        />
       </section>
 
       {/* THE STORY */}
