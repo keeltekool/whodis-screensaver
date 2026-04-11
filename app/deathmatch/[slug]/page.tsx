@@ -241,6 +241,7 @@ export default function DeathmatchFightPage() {
     return (
       <main className="min-h-screen flex flex-col bg-surface">
         <FightResultScreen
+          slug={slug}
           fighterA={fighter_a}
           fighterB={fighter_b}
           photoBaseUrl={R2_BASE}

@@ -4,6 +4,7 @@ const STORAGE_KEY = "whodis-deathmatch";
 
 const EMPTY_RECORD: DeathmatchRecord = {
   results: {},
+  history: {},
   fights_played: 0,
   overall_correct: 0,
   overall_total: 0,
@@ -66,6 +67,14 @@ export function loadRecord(): DeathmatchRecord {
 
 export function saveResult(slug: string, result: FightResult): DeathmatchRecord {
   const record = loadRecord();
+
+  // Push previous result into history before overwriting
+  if (record.results[slug]) {
+    if (!record.history[slug]) record.history[slug] = [];
+    record.history[slug].push(record.results[slug]);
+  }
+  if (!record.history) record.history = {};
+
   record.results[slug] = result;
 
   // Recalculate totals from all results

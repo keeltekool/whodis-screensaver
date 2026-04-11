@@ -1,8 +1,8 @@
 # WHO DIS? — DEATHMATCH MODE
 
 ## Design Document
-**Date:** 2026-04-11
-**Status:** Approved
+**Date:** 2026-04-11 (updated 2026-04-11)
+**Status:** Shipped
 **Mode:** #5 in the Who Dis? arcade
 
 ---
@@ -19,13 +19,20 @@ This is the fifth mode in the Who Dis? ecosystem, alongside The Game, The Wall, 
 
 ### 2.1 Fight Card Wall (`/deathmatch`)
 
-The entry point. A grid of all 30 matchups displayed as fight promotion cards.
+The entry point. A grid of all 50 matchups displayed as fight promotion cards.
+
+Two-tier filter system at the top:
+- **Difficulty filter** (top): ALL LEVELS / ★ EASY (21) / ★★ MEDIUM (20) / ★★★ HARD (9)
+- **Category filter** (below): ALL FIGHTS / FILM (13) / MUSIC (17) / ATHLETE (11) / CROSSOVER (9)
+
+Category counts update dynamically based on selected difficulty. Cards shuffle randomly in ALL FIGHTS view.
 
 Each card shows:
 - Both fighter photos side by side, separated by a `#ffba20` lightning bolt
-- Matchup tagline below in `label-sm` uppercase
+- Fighter last names overlaid on photos
+- Category badge (FILM/MUSIC/ATHLETE/CROSSOVER)
 - Difficulty rating (1-3 stars)
-- State: `FIGHT →` (unplayed) or `✓ DONE` with accuracy score (played)
+- State: `FIGHT →` (unplayed) or `REPLAY →` with accuracy score (played)
 
 Below the grid:
 - Player's overall record: fights played, overall accuracy %, best score
@@ -122,7 +129,7 @@ Based on cumulative accuracy across all matchups played:
 
 ### 3.4 Player Stats (localStorage)
 
-Tracked across all 30 matchups:
+Tracked across all 50 matchups:
 - Fights played (x/30)
 - Overall accuracy (%)
 - Best single-fight score
@@ -225,7 +232,7 @@ Notes:
 - `correct_answer` is `'a'` or `'b'` (refers to fighter_a or fighter_b)
 - `round_label` is the category: ORIGIN STORY, THE NUMBERS, THE FLEX, etc.
 - No new R2 uploads — matchups reference existing `celebrities.id` which has `photo_key`
-- `matchup_type`: `rivalry`, `crossover`, `franchise`, `era`, `collective`
+- `matchup_type`: `film`, `music`, `athlete`, `crossover`
 
 ### 5.2 API Routes
 
@@ -295,7 +302,7 @@ New ExperienceCard:
 Label:       WHO DIS? — DEATHMATCH
 Title:       DEATHMATCH
 Description: Two legends. Seven rounds. Pick your answer and your
-             knowledge decides who walks away standing. 30 showdowns.
+             knowledge decides who walks away standing. 50 showdowns.
              No refs. No mercy.
 CTA:         FIGHT →
 Route:       /deathmatch
@@ -361,7 +368,7 @@ All within design system constraints (linear or ease-in-out only, no bounce):
 - Tagline
 
 ### 8.2 Total Content
-- 30 matchups × 7 questions = **210 questions**
+- 50 matchups × 7 questions = **350 questions**
 - 30 taglines + 60 nicknames
 - Each question must be factually accurate and verifiable
 

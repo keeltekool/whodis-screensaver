@@ -56,6 +56,7 @@ export type FightResult = {
 
 export type DeathmatchRecord = {
   results: Record<string, FightResult>;
+  history: Record<string, FightResult[]>;
   fights_played: number;
   overall_correct: number;
   overall_total: number;
