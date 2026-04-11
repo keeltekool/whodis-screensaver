@@ -1,4 +1,4 @@
-export const DAILY_LAUNCH_DATE = "2026-04-12";
+export const DAILY_LAUNCH_DATE = "2026-04-11";
 
 export function getDayNumber(dateStr: string): number {
   const launch = new Date(DAILY_LAUNCH_DATE);
