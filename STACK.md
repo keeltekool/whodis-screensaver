@@ -9,9 +9,10 @@
 |---------|---------|------------|
 | Neon Postgres | Celebrity metadata (shared DB with WHO DIS? game, read-only) | `DATABASE_URL` |
 | Cloudflare R2 | Photo CDN (shared `who-dis` bucket, read-only) | `NEXT_PUBLIC_R2_PUBLIC_URL` |
-| Vercel | Hosting (Next.js 16) | — |
+| Brevo | Daily newsletter email delivery (free: 300/day) | `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` |
+| Vercel | Hosting (Next.js 16) + Cron (daily 7AM UTC) | — |
 
-Env vars stored in: Vercel (2 vars), `.env.local` (local dev)
+Env vars stored in: Vercel (4 vars), `.env.local` (local dev)
 
 ## Brand
 
