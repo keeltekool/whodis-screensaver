@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { FightResult as FightResultType, Fighter } from "@/lib/types";
 import { generateShareCard, getRank, loadRecord } from "@/lib/deathmatch";
 import FighterDisplay from "./FighterDisplay";
@@ -12,6 +13,7 @@ interface FightResultProps {
 }
 
 export default function FightResult({ fighterA, fighterB, photoBaseUrl, result }: FightResultProps) {
+  const [copied, setCopied] = useState(false);
   const winnerName = result.winner === "a" ? fighterA.name : result.winner === "b" ? fighterB.name : null;
   const record = loadRecord();
   const overallAccuracy = record.overall_total > 0 ? record.overall_correct / record.overall_total : 0;
@@ -26,6 +28,8 @@ export default function FightResult({ fighterA, fighterB, photoBaseUrl, result }
       }
     } else {
       await navigator.clipboard.writeText(shareText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -88,7 +92,7 @@ export default function FightResult({ fighterA, fighterB, photoBaseUrl, result }
           onClick={handleShare}
           className="bg-surface-container-high text-on-surface font-label font-bold text-sm py-4 px-8 tracking-[0.1em] uppercase transition-all hover:bg-surface-bright"
         >
-          SHARE
+          {copied ? "COPIED ✓" : "SHARE"}
         </button>
         <a
           href="/deathmatch"

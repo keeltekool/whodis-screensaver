@@ -38,8 +38,14 @@ export default function DeathmatchPage() {
   }, []);
 
   const filteredMatchups = useMemo(() => {
-    if (activeCategory === "all") return matchups;
-    return matchups.filter((m) => m.matchup_type === activeCategory);
+    const list = activeCategory === "all" ? [...matchups] : matchups.filter((m) => m.matchup_type === activeCategory);
+    if (activeCategory === "all") {
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+    }
+    return list;
   }, [matchups, activeCategory]);
 
   const categoryCounts = useMemo(() => {

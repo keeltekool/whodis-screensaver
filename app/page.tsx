@@ -60,7 +60,7 @@ export default function HubPage() {
           <ExperienceCard
             label="WHO DIS? — DEATHMATCH"
             title="DEATHMATCH"
-            description="Two legends. Seven rounds. Pick your answer and your knowledge decides who walks away standing. 30 showdowns. No refs. No mercy."
+            description="Two legends. Seven rounds. Pick your answer and your knowledge decides who walks away standing. 50 showdowns. No refs. No mercy."
             ctaText="FIGHT →"
             href="/deathmatch"
           />
