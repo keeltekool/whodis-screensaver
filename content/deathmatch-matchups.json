@@ -7,7 +7,7 @@
     "fighter_b_nickname": "The Austrian Oak",
     "tagline": "The Ultimate 80s Action Showdown",
     "matchup_type": "film",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -347,7 +347,7 @@
     "fighter_b_nickname": "El Pibe de Oro",
     "tagline": "God's Hand vs The King's Feet",
     "matchup_type": "athlete",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -415,7 +415,7 @@
     "fighter_b_nickname": "The Punk Priestess",
     "tagline": "Who Owned Downtown?",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -483,7 +483,7 @@
     "fighter_b_nickname": "The Voice",
     "tagline": "Who Wore the Crown?",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -551,7 +551,7 @@
     "fighter_b_nickname": "The Legend",
     "tagline": "Enter the Dragon vs Missing in Action",
     "matchup_type": "film",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -755,7 +755,7 @@
     "fighter_b_nickname": "The Voice",
     "tagline": "Diva Decades: Motown vs Pop",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -823,7 +823,7 @@
     "fighter_b_nickname": "Hef",
     "tagline": "Empire Builders: Vice Edition",
     "matchup_type": "crossover",
-    "difficulty": 3,
+    "difficulty": 2,
     "rounds": [
       {
         "round_number": 1,
@@ -959,7 +959,7 @@
     "fighter_b_nickname": "Rod the Mod",
     "tagline": "British Rock Strutters",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1027,7 +1027,7 @@
     "fighter_b_nickname": "The Architect",
     "tagline": "The Protégé vs The Architect",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1299,7 +1299,7 @@
     "fighter_b_nickname": "The Guitar God",
     "tagline": "Roots vs Voltage",
     "matchup_type": "crossover",
-    "difficulty": 3,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1367,7 +1367,7 @@
     "fighter_b_nickname": "The Big Dipper",
     "tagline": "The Greatest vs The Giant",
     "matchup_type": "athlete",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1707,7 +1707,7 @@
     "fighter_b_nickname": "The Brothers Gibb",
     "tagline": "Disco Falsetto vs Pop Falsetto",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1775,7 +1775,7 @@
     "fighter_b_nickname": "The Graduate",
     "tagline": "Scarface vs The Graduate",
     "matchup_type": "film",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1843,7 +1843,7 @@
     "fighter_b_nickname": "The Man With No Name",
     "tagline": "The Dance vs The Stare",
     "matchup_type": "film",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1911,7 +1911,7 @@
     "fighter_b_nickname": "The Queen of Rock",
     "tagline": "Survivor vs Survivor",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -1979,7 +1979,7 @@
     "fighter_b_nickname": "The Animal",
     "tagline": "Saturday Night Legends",
     "matchup_type": "film",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -2455,7 +2455,7 @@
     "fighter_b_nickname": "Highway to Hell",
     "tagline": "Bohemian vs Highway to Hell",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -2795,7 +2795,7 @@
     "fighter_b_nickname": "The Doggfather",
     "tagline": "East Coast Lover vs West Coast Smoker",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -2863,7 +2863,7 @@
     "fighter_b_nickname": "The Dragon",
     "tagline": "Philly vs Hong Kong",
     "matchup_type": "crossover",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -2931,7 +2931,7 @@
     "fighter_b_nickname": "The Greatest",
     "tagline": "Air vs The Greatest",
     "matchup_type": "crossover",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -3135,7 +3135,7 @@
     "fighter_b_nickname": "Axel Foley",
     "tagline": "Miami Vice vs Beverly Hills Cop",
     "matchup_type": "crossover",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,
@@ -3203,7 +3203,7 @@
     "fighter_b_nickname": "The Lips",
     "tagline": "The Voice vs The Moves",
     "matchup_type": "music",
-    "difficulty": 2,
+    "difficulty": 1,
     "rounds": [
       {
         "round_number": 1,

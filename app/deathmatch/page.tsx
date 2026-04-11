@@ -10,6 +10,9 @@ const R2_BASE = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://pub-19f678b6a5
 const CATEGORIES = ["all", "film", "music", "athlete", "crossover"] as const;
 type Category = (typeof CATEGORIES)[number];
 
+const DIFFICULTIES = ["all", 1, 2, 3] as const;
+type Difficulty = (typeof DIFFICULTIES)[number];
+
 const CATEGORY_LABELS: Record<Category, string> = {
   all: "ALL FIGHTS",
   film: "FILM",
@@ -18,10 +21,18 @@ const CATEGORY_LABELS: Record<Category, string> = {
   crossover: "CROSSOVER",
 };
 
+const DIFFICULTY_LABELS: Record<string, string> = {
+  all: "ALL LEVELS",
+  "1": "★ EASY",
+  "2": "★★ MEDIUM",
+  "3": "★★★ HARD",
+};
+
 export default function DeathmatchPage() {
   const [matchups, setMatchups] = useState<Matchup[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const [activeDifficulty, setActiveDifficulty] = useState<Difficulty>("all");
   const record = typeof window !== "undefined" ? loadRecord() : null;
 
   useEffect(() => {
@@ -37,8 +48,16 @@ export default function DeathmatchPage() {
       });
   }, []);
 
+  // Matchups filtered by difficulty (top-level filter)
+  const difficultyFiltered = useMemo(() => {
+    if (activeDifficulty === "all") return matchups;
+    return matchups.filter((m) => m.difficulty === activeDifficulty);
+  }, [matchups, activeDifficulty]);
+
+  // Final filtered list (difficulty + category)
   const filteredMatchups = useMemo(() => {
-    const list = activeCategory === "all" ? [...matchups] : matchups.filter((m) => m.matchup_type === activeCategory);
+    const list = activeCategory === "all" ? [...difficultyFiltered] : difficultyFiltered.filter((m) => m.matchup_type === activeCategory);
+    // Shuffle in "all" category view
     if (activeCategory === "all") {
       for (let i = list.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -46,12 +65,22 @@ export default function DeathmatchPage() {
       }
     }
     return list;
-  }, [matchups, activeCategory]);
+  }, [difficultyFiltered, activeCategory]);
 
+  // Category counts — based on difficulty-filtered set
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    for (const m of matchups) {
+    for (const m of difficultyFiltered) {
       counts[m.matchup_type] = (counts[m.matchup_type] || 0) + 1;
+    }
+    return counts;
+  }, [difficultyFiltered]);
+
+  // Difficulty counts — based on full matchup set (top-level, not affected by category)
+  const difficultyCounts = useMemo(() => {
+    const counts: Record<number, number> = {};
+    for (const m of matchups) {
+      counts[m.difficulty] = (counts[m.difficulty] || 0) + 1;
     }
     return counts;
   }, [matchups]);
@@ -93,12 +122,35 @@ export default function DeathmatchPage() {
         )}
       </section>
 
-      {/* Category Filter */}
+      {/* Difficulty Filter (top level) */}
+      <section className="px-8 pb-2 max-w-5xl mx-auto">
+        <div className="flex flex-wrap gap-2">
+          {DIFFICULTIES.map((diff) => {
+            const isActive = activeDifficulty === diff;
+            const count = diff === "all" ? matchups.length : difficultyCounts[diff as number] || 0;
+            return (
+              <button
+                key={String(diff)}
+                onClick={() => setActiveDifficulty(diff)}
+                className={`font-label text-[10px] sm:text-xs font-bold uppercase tracking-[0.05em] sm:tracking-[0.1em] px-2.5 sm:px-4 py-1.5 sm:py-2 transition-all ${
+                  isActive
+                    ? "bg-primary-container text-on-primary"
+                    : "bg-surface-container-high text-on-surface-variant/60 hover:text-on-surface-variant hover:bg-surface-bright"
+                }`}
+              >
+                {DIFFICULTY_LABELS[String(diff)]} ({count})
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Category Filter (second level) */}
       <section className="px-8 pb-6 max-w-5xl mx-auto">
         <div className="flex flex-wrap gap-2">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat;
-            const count = cat === "all" ? matchups.length : categoryCounts[cat] || 0;
+            const count = cat === "all" ? difficultyFiltered.length : categoryCounts[cat] || 0;
             return (
               <button
                 key={cat}
@@ -118,17 +170,23 @@ export default function DeathmatchPage() {
 
       {/* Fight Cards Grid */}
       <section className="px-8 pb-16 max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-          {filteredMatchups.map((m) => (
-            <FightCard
-              key={m.slug}
-              matchup={m}
-              photoBaseUrl={R2_BASE}
-              played={!!record?.results[m.slug]}
-              accuracy={record?.results[m.slug]?.accuracy}
-            />
-          ))}
-        </div>
+        {filteredMatchups.length === 0 ? (
+          <p className="text-on-surface-variant/40 font-label text-sm uppercase tracking-[0.1em] text-center py-12">
+            No matchups for this combination
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+            {filteredMatchups.map((m) => (
+              <FightCard
+                key={m.slug}
+                matchup={m}
+                photoBaseUrl={R2_BASE}
+                played={!!record?.results[m.slug]}
+                accuracy={record?.results[m.slug]?.accuracy}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
