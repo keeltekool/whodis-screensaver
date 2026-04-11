@@ -13,7 +13,7 @@ const EMPTY_RECORD: DeathmatchRecord = {
 
 // --- Verdicts ---
 
-export function getVerdict(accuracy: number): string {
+export function getVerdict(accuracy: number): "KNOCKOUT" | "DECISION" | "SPLIT DECISION" | "TKO" {
   if (accuracy === 7) return "KNOCKOUT";
   if (accuracy >= 5) return "DECISION";
   if (accuracy >= 3) return "SPLIT DECISION";

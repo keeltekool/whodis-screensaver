@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface AnswerRevealProps {
   correct: boolean;
   correctFighterName: string;
@@ -19,12 +21,14 @@ export default function AnswerReveal({
         {correct ? "✓ CORRECT" : "✗ WRONG"}
       </span>
 
-      <div className="photo-matte w-full max-w-[180px] sm:max-w-[320px] mb-3 sm:mb-4">
-        <div className="aspect-[3/4] overflow-hidden">
-          <img
+      <div className="photo-matte w-full max-w-[60vw] sm:max-w-[320px] mb-3 sm:mb-4">
+        <div className="aspect-[3/4] overflow-hidden relative">
+          <Image
             src={`${photoBaseUrl}/photos/${correctFighterPhotoKey}`}
             alt={correctFighterName}
-            className="w-full h-full object-cover photo-filter"
+            fill
+            sizes="(max-width: 640px) 180px, 320px"
+            className="object-cover photo-filter"
           />
         </div>
       </div>

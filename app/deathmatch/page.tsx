@@ -98,7 +98,7 @@ export default function DeathmatchPage() {
 
   return (
     <main className="min-h-screen bg-surface">
-      <section className="px-8 pt-16 pb-6 max-w-5xl mx-auto">
+      <section className="px-4 md:px-8 pt-16 pb-6 max-w-5xl mx-auto">
         <a
           href="/"
           className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/50 hover:text-primary-fixed-dim transition-colors"
@@ -123,7 +123,7 @@ export default function DeathmatchPage() {
       </section>
 
       {/* Difficulty Filter (top level) */}
-      <section className="px-8 pb-2 max-w-5xl mx-auto">
+      <section className="px-4 md:px-8 pb-2 max-w-5xl mx-auto">
         <div className="flex flex-wrap gap-2">
           {DIFFICULTIES.map((diff) => {
             const isActive = activeDifficulty === diff;
@@ -146,7 +146,7 @@ export default function DeathmatchPage() {
       </section>
 
       {/* Category Filter (second level) */}
-      <section className="px-8 pb-6 max-w-5xl mx-auto">
+      <section className="px-4 md:px-8 pb-6 max-w-5xl mx-auto">
         <div className="flex flex-wrap gap-2">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat;
@@ -169,7 +169,7 @@ export default function DeathmatchPage() {
       </section>
 
       {/* Fight Cards Grid */}
-      <section className="px-8 pb-16 max-w-5xl mx-auto">
+      <section className="px-4 md:px-8 pb-16 max-w-5xl mx-auto">
         {filteredMatchups.length === 0 ? (
           <p className="text-on-surface-variant/40 font-label text-sm uppercase tracking-[0.1em] text-center py-12">
             No matchups for this combination

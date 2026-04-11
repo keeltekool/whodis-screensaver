@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Matchup } from "@/lib/types";
 
 interface FightCardProps {
@@ -20,10 +21,12 @@ export default function FightCard({ matchup, photoBaseUrl, played, accuracy }: F
     >
       <div className="flex">
         <div className="flex-1 aspect-[3/4] overflow-hidden relative">
-          <img
+          <Image
             src={`${photoBaseUrl}/photos/${fighter_a.photo_key}`}
             alt={fighter_a.name}
-            className="w-full h-full object-cover photo-filter"
+            fill
+            sizes="(max-width: 640px) 25vw, (max-width: 1024px) 20vw, 15vw"
+            className="object-cover photo-filter"
           />
           <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/80 to-transparent">
             <span className="font-headline font-bold text-[10px] sm:text-sm text-white tracking-tight">
@@ -33,10 +36,12 @@ export default function FightCard({ matchup, photoBaseUrl, played, accuracy }: F
         </div>
         <div className="w-[3px] bg-primary-fixed-dim flex-shrink-0" />
         <div className="flex-1 aspect-[3/4] overflow-hidden relative">
-          <img
+          <Image
             src={`${photoBaseUrl}/photos/${fighter_b.photo_key}`}
             alt={fighter_b.name}
-            className="w-full h-full object-cover photo-filter"
+            fill
+            sizes="(max-width: 640px) 25vw, (max-width: 1024px) 20vw, 15vw"
+            className="object-cover photo-filter"
           />
           <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 bg-gradient-to-t from-black/80 to-transparent">
             <span className="font-headline font-bold text-[10px] sm:text-sm text-white tracking-tight">

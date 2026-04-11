@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface QuestionScreenProps {
   roundNumber: number;
   roundLabel: string;
@@ -16,7 +18,7 @@ export default function QuestionScreen({
   fighterAPhotoKey, fighterBPhotoKey, photoBaseUrl, onAnswer, disabled,
 }: QuestionScreenProps) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 max-w-3xl mx-auto">
+    <div className="flex-1 flex flex-col items-center justify-center px-3 py-6 md:px-6 md:py-8 max-w-3xl mx-auto">
       <span className="font-label text-[10px] uppercase tracking-[0.3em] text-primary-fixed-dim/60 mb-4">
         Round {roundNumber} · {roundLabel}
       </span>
@@ -29,17 +31,19 @@ export default function QuestionScreen({
         Pick your answer
       </span>
 
-      <div className="grid grid-cols-2 gap-6 w-full max-w-lg">
+      <div className="grid grid-cols-2 gap-3 md:gap-6 w-full max-w-lg">
         <button
           onClick={() => onAnswer("a")}
           disabled={disabled}
           className="group relative bg-surface-container-low cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex flex-col items-center hover:scale-[1.03] hover:outline hover:outline-2 hover:outline-primary-fixed-dim active:scale-[0.98]"
         >
           <div className="w-full aspect-[3/4] overflow-hidden relative">
-            <img
+            <Image
               src={`${photoBaseUrl}/photos/${fighterAPhotoKey}`}
               alt={fighterAName}
-              className="w-full h-full object-cover photo-filter group-hover:brightness-125 transition-all duration-200"
+              fill
+              sizes="(max-width: 640px) 40vw, 250px"
+              className="object-cover photo-filter group-hover:brightness-125 transition-all duration-200"
             />
             <div className="absolute inset-0 bg-primary-fixed-dim/0 group-hover:bg-primary-fixed-dim/10 transition-all duration-200" />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -58,10 +62,12 @@ export default function QuestionScreen({
           className="group relative bg-surface-container-low cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex flex-col items-center hover:scale-[1.03] hover:outline hover:outline-2 hover:outline-primary-fixed-dim active:scale-[0.98]"
         >
           <div className="w-full aspect-[3/4] overflow-hidden relative">
-            <img
+            <Image
               src={`${photoBaseUrl}/photos/${fighterBPhotoKey}`}
               alt={fighterBName}
-              className="w-full h-full object-cover photo-filter group-hover:brightness-125 transition-all duration-200"
+              fill
+              sizes="(max-width: 640px) 40vw, 250px"
+              className="object-cover photo-filter group-hover:brightness-125 transition-all duration-200"
             />
             <div className="absolute inset-0 bg-primary-fixed-dim/0 group-hover:bg-primary-fixed-dim/10 transition-all duration-200" />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">

@@ -131,7 +131,7 @@ export default function DeathmatchFightPage() {
   if (phase === "prefight") {
     return (
       <main className="min-h-screen flex flex-col bg-surface">
-        <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
+        <div className="flex-1 flex flex-col items-center justify-center px-3 py-6 md:px-6 md:py-8">
           <span className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant/50 mb-8">
             Celebrity Deathmatch
           </span>

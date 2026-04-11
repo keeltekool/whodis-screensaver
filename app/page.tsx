@@ -12,7 +12,7 @@ export default function HubPage() {
       <div className="fixed bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-primary-fixed-dim/20 pointer-events-none" />
 
       {/* HERO */}
-      <section className="flex flex-col items-center justify-center px-8 pt-24 pb-16 relative">
+      <section className="flex flex-col items-center justify-center px-4 md:px-8 pt-14 pb-10 md:pt-24 md:pb-16 relative">
         <div className="absolute inset-0 grain-texture" />
         <span className="font-label text-xs uppercase tracking-[0.3em] text-primary/60 mb-2">
           The Collection
@@ -30,7 +30,7 @@ export default function HubPage() {
       </section>
 
       {/* EXPERIENCES — The Gateway */}
-      <section className="px-8 pb-16 max-w-5xl mx-auto w-full">
+      <section className="px-4 md:px-8 pb-10 md:pb-16 max-w-5xl mx-auto w-full">
         <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
           Four Ways In
         </h2>
@@ -68,7 +68,7 @@ export default function HubPage() {
       </section>
 
       {/* THE VAULT — Master Collection */}
-      <section className="px-8 pb-16 max-w-5xl mx-auto w-full">
+      <section className="px-4 md:px-8 pb-10 md:pb-16 max-w-5xl mx-auto w-full">
         <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
           The Vault
         </h2>
@@ -82,7 +82,7 @@ export default function HubPage() {
       </section>
 
       {/* THE STORY */}
-      <section className="px-8 pb-12 max-w-2xl mx-auto w-full">
+      <section className="px-4 md:px-8 pb-12 max-w-2xl mx-auto w-full">
         <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
           The Icons
         </h2>

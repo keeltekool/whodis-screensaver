@@ -48,7 +48,7 @@ export type FightResult = {
   fight_score_a: number;
   fight_score_b: number;
   winner: "a" | "b" | "draw";
-  verdict: string;
+  verdict: "KNOCKOUT" | "DECISION" | "SPLIT DECISION" | "TKO";
   date: string;
   answers: ("a" | "b")[];
   correct: boolean[];
