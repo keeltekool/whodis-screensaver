@@ -67,6 +67,20 @@ export default function HubPage() {
         </div>
       </section>
 
+      {/* THE DAILY — Newsletter */}
+      <section className="px-4 md:px-8 pb-10 md:pb-16 max-w-5xl mx-auto w-full">
+        <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
+          The Daily
+        </h2>
+        <ExperienceCard
+          label="WHO DIS? — THE DAILY"
+          title="THE DAILY"
+          description="One deathmatch. Every day. Same for everyone. Subscribe and get a daily showdown delivered to your inbox every morning. Two legends, seven questions — your knowledge decides who wins."
+          ctaText="SUBSCRIBE →"
+          href="/daily"
+        />
+      </section>
+
       {/* THE VAULT — Master Collection */}
       <section className="px-4 md:px-8 pb-10 md:pb-16 max-w-5xl mx-auto w-full">
         <h2 className="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">
