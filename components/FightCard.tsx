@@ -34,7 +34,7 @@ export default function FightCard({ matchup, photoBaseUrl, played, accuracy }: F
             </span>
           </div>
         </div>
-        <div className="w-[3px] bg-primary-fixed-dim flex-shrink-0" />
+        <div className="w-[1px] bg-surface-container-high flex-shrink-0" />
         <div className="flex-1 aspect-[3/4] overflow-hidden relative">
           <Image
             src={`${photoBaseUrl}/photos/${fighter_b.photo_key}`}

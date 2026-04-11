@@ -7,6 +7,7 @@ interface SettingsPanelProps {
   onUpdate: (patch: Partial<ScreensaverSettings>) => void;
   onClose: () => void;
   disableFacts?: boolean;
+  availableCategories?: string[];
 }
 
 const ALL_CATEGORIES = ["FILM", "MUSIC", "ATHLETE"];
@@ -17,7 +18,8 @@ const TRANSITIONS: { value: TransitionStyle; label: string }[] = [
   { value: "cut", label: "Hard Cut" },
 ];
 
-export default function SettingsPanel({ settings, onUpdate, onClose, disableFacts }: SettingsPanelProps) {
+export default function SettingsPanel({ settings, onUpdate, onClose, disableFacts, availableCategories }: SettingsPanelProps) {
+  const categories = availableCategories || ALL_CATEGORIES;
   function toggleInArray(arr: string[], value: string): string[] {
     return arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
   }
@@ -78,7 +80,7 @@ export default function SettingsPanel({ settings, onUpdate, onClose, disableFact
             Categories
           </label>
           <div className="flex gap-2">
-            {ALL_CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => onUpdate({ categories: toggleInArray(settings.categories, cat) })}

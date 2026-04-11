@@ -89,10 +89,16 @@ body {
   mix-blend-mode: overlay;
 }
 
-/* Gallery matte frame */
+/* Gallery matte frame — tighter on mobile */
 .photo-matte {
   background: var(--color-surface-container-lowest);
-  padding: 16px;
+  padding: 6px;
+}
+
+@media (min-width: 768px) {
+  .photo-matte {
+    padding: 16px;
+  }
 }
 
 /* Photo filter — B&W high contrast */

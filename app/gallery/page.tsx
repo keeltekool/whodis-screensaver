@@ -6,6 +6,7 @@ import { useSettings } from "@/hooks/useSettings";
 import { useSlideshow } from "@/hooks/useSlideshow";
 import SlideView from "@/components/SlideView";
 import SettingsPanel from "@/components/SettingsPanel";
+import { useSwipe } from "@/hooks/useSwipe";
 
 const R2_BASE = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://pub-19f678b6a57845a7bafc5e706541ab76.r2.dev";
 
@@ -17,6 +18,7 @@ export default function GalleryPage() {
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { settings, update } = useSettings();
   const { current, paused, next, prev, togglePause } = useSlideshow(celebrities, settings, R2_BASE);
+  const swipeHandlers = useSwipe(next, prev);
 
   // Fetch color celebrities
   useEffect(() => {
@@ -44,8 +46,14 @@ export default function GalleryPage() {
   useEffect(() => {
     const handler = () => resetHideTimer();
     window.addEventListener("mousemove", handler);
+    window.addEventListener("touchstart", handler);
+    window.addEventListener("touchmove", handler);
     resetHideTimer();
-    return () => window.removeEventListener("mousemove", handler);
+    return () => {
+      window.removeEventListener("mousemove", handler);
+      window.removeEventListener("touchstart", handler);
+      window.removeEventListener("touchmove", handler);
+    };
   }, [resetHideTimer]);
 
   // Keyboard controls
@@ -92,6 +100,7 @@ export default function GalleryPage() {
     <main
       className="min-h-screen flex flex-col bg-surface relative overflow-hidden"
       style={{ cursor: showControls ? "default" : "none" }}
+      {...swipeHandlers}
     >
       {/* Slide — showFact forced false for color (no facts available) */}
       <div className={`flex-1 flex transition-opacity ${settings.transition === "crossfade" ? "duration-1000" : "duration-0"}`}>
@@ -102,13 +111,13 @@ export default function GalleryPage() {
       <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${showControls ? "opacity-100" : "opacity-0"}`}>
         {/* Bottom bar */}
         <div className="absolute bottom-0 inset-x-0 flex items-center justify-center gap-6 p-6 pointer-events-auto">
-          <button onClick={prev} className="text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
+          <button onClick={prev} className="hidden md:block text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
             <span className="font-headline text-2xl">&#9664;</span>
           </button>
           <button onClick={togglePause} className="text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
             <span className="font-headline text-2xl">{paused ? "\u25B6" : "\u23F8"}</span>
           </button>
-          <button onClick={next} className="text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
+          <button onClick={next} className="hidden md:block text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
             <span className="font-headline text-2xl">&#9654;</span>
           </button>
         </div>
@@ -130,8 +139,11 @@ export default function GalleryPage() {
         </a>
 
         {/* Bottom-right ESC hint */}
-        <span className="absolute bottom-6 right-6 text-on-surface-variant/30 font-label text-[10px] uppercase tracking-widest pointer-events-none">
+        <span className="absolute bottom-6 right-6 text-on-surface-variant/30 font-label text-[10px] uppercase tracking-widest pointer-events-none hidden md:block">
           ESC to exit &middot; F fullscreen
+        </span>
+        <span className="absolute bottom-6 right-6 text-on-surface-variant/30 font-label text-[10px] uppercase tracking-widest pointer-events-none md:hidden">
+          Tap for controls &middot; Swipe to navigate
         </span>
       </div>
 

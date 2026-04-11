@@ -22,8 +22,9 @@ export default function PhotoCarousel({ photoBaseUrl }: PhotoCarouselProps) {
 
   if (photoKeys.length === 0) return null;
 
-  // Duplicate for seamless loop
-  const allKeys = [...photoKeys, ...photoKeys];
+  // Limit to 40 for mobile performance, duplicate for seamless loop
+  const limitedKeys = photoKeys.slice(0, 40);
+  const allKeys = [...limitedKeys, ...limitedKeys];
 
   return (
     <div className="w-full overflow-hidden py-8">
@@ -36,6 +37,8 @@ export default function PhotoCarousel({ photoBaseUrl }: PhotoCarouselProps) {
             key={`${key}-${i}`}
             src={`${photoBaseUrl}/photos/${key}`}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-24 h-24 object-cover photo-filter shrink-0"
           />
         ))}

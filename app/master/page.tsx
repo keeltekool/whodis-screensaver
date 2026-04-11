@@ -9,8 +9,9 @@ import SettingsPanel from "@/components/SettingsPanel";
 import { useSwipe } from "@/hooks/useSwipe";
 
 const R2_BASE = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://pub-19f678b6a57845a7bafc5e706541ab76.r2.dev";
+const ALL_MASTER_CATEGORIES = ["FILM", "MUSIC", "ATHLETE", "FASHION", "CULTURAL", "SCENE"];
 
-export default function ScreensaverPage() {
+export default function MasterPage() {
   const [celebrities, setCelebrities] = useState<Celebrity[]>([]);
   const [loading, setLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
@@ -20,21 +21,21 @@ export default function ScreensaverPage() {
   const { current, paused, next, prev, togglePause } = useSlideshow(celebrities, settings, R2_BASE);
   const swipeHandlers = useSwipe(next, prev);
 
-  // Fetch celebrities
+  // Fetch ALL celebrities
   useEffect(() => {
-    fetch("/api/celebrities")
+    fetch("/api/master")
       .then((res) => res.json())
       .then((data) => {
         setCelebrities(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to fetch celebrities:", err);
+        console.error("Failed to fetch master collection:", err);
         setLoading(false);
       });
   }, []);
 
-  // Auto-hide controls after 3s of no mouse movement
+  // Auto-hide controls + cursor after 3s
   const resetHideTimer = useCallback(() => {
     setShowControls(true);
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
@@ -102,9 +103,9 @@ export default function ScreensaverPage() {
       style={{ cursor: showControls ? "default" : "none" }}
       {...swipeHandlers}
     >
-      {/* Slide */}
+      {/* Slide — no colorMode, let SlideView handle per photo_type */}
       <div className={`flex-1 flex transition-opacity ${settings.transition === "crossfade" ? "duration-1000" : "duration-0"}`}>
-        <SlideView celebrity={current} photoBaseUrl={R2_BASE} showFact={settings.showFacts} />
+        <SlideView celebrity={current} photoBaseUrl={R2_BASE} showFact={false} />
       </div>
 
       {/* Overlay controls */}
@@ -147,9 +148,15 @@ export default function ScreensaverPage() {
         </span>
       </div>
 
-      {/* Settings panel overlay */}
+      {/* Settings panel — with all master categories */}
       {showSettings && (
-        <SettingsPanel settings={settings} onUpdate={update} onClose={() => setShowSettings(false)} />
+        <SettingsPanel
+          settings={settings}
+          onUpdate={update}
+          onClose={() => setShowSettings(false)}
+          disableFacts
+          availableCategories={ALL_MASTER_CATEGORIES}
+        />
       )}
     </main>
   );
