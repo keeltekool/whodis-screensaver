@@ -10,7 +10,7 @@ interface FighterDisplayProps {
 
 export default function FighterDisplay({ name, nickname, photoKey, photoBaseUrl, category, era, dimmed }: FighterDisplayProps) {
   return (
-    <div className={`flex flex-col items-center w-[140px] sm:w-[200px] ${dimmed ? "opacity-40 grayscale" : ""} transition-all duration-500`}>
+    <div className={`flex flex-col items-center w-[140px] sm:w-[200px] md:w-[280px] ${dimmed ? "opacity-40 grayscale" : ""} transition-all duration-500`}>
       <div className="photo-matte w-full">
         <div className="aspect-[3/4] overflow-hidden">
           <img
