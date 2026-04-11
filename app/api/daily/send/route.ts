@@ -2,7 +2,6 @@ import { getDb } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getDayNumber, getTodayDateStr } from "@/lib/daily";
-import DailyChallengeEmail from "@/emails/daily-challenge";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://whodis-screensaver.vercel.app";
@@ -62,21 +61,18 @@ export async function POST(req: Request) {
     for (let i = 0; i < subscribers.length; i += 50) {
       const batch = subscribers.slice(i, i + 50);
       const results = await Promise.allSettled(
-        batch.map((sub) =>
-          resend.emails.send({
+        batch.map((sub) => {
+          const unsubUrl = `${BASE_URL}/api/daily/unsubscribe?email=${encodeURIComponent(sub.email)}`;
+          const challengeUrl = `${BASE_URL}/daily/${today}`;
+          const html = `<!DOCTYPE html><html><body style="background:#131313;margin:0;padding:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif"><div style="max-width:500px;margin:0 auto;padding:40px 20px"><p style="color:#ffba20;font-size:12px;letter-spacing:3px;text-transform:uppercase;text-align:center;margin:0 0 8px">WHO DIS? — THE DAILY</p><p style="color:#e5e2e1;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-align:center;margin:0 0 32px;opacity:0.5">${today} · #${dayNumber}</p><div style="background:#1c1b1b;padding:32px 24px;text-align:center"><p style="color:#ffba20;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px">TODAY'S DEATHMATCH</p><p style="color:#e5e2e1;font-size:18px;line-height:1.4;margin:0 0 24px;font-style:italic">"${teaser}"</p><a href="${challengeUrl}" style="display:inline-block;background:#ffba20;color:#131313;font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:16px 40px;text-decoration:none">PLAY TODAY'S CHALLENGE →</a></div><hr style="border-color:#2a2a2a;margin:32px 0"/><p style="color:#666;font-size:11px;text-align:center;line-height:1.6">You're receiving this because you subscribed to WHO DIS? THE DAILY.</p><p style="text-align:center;margin:8px 0 0"><a href="${unsubUrl}" style="color:#666;font-size:11px;text-decoration:underline">Unsubscribe</a></p></div></body></html>`;
+
+          return resend.emails.send({
             from: "WHO DIS? <onboarding@resend.dev>",
             to: sub.email,
             subject: `WHO DIS? Daily #${dayNumber} — Deathmatch`,
-            react: DailyChallengeEmail({
-              date: today,
-              dayNumber,
-              challengeType: "deathmatch",
-              teaser,
-              challengeUrl: `${BASE_URL}/daily/${today}`,
-              unsubscribeUrl: `${BASE_URL}/api/daily/unsubscribe?email=${encodeURIComponent(sub.email)}`,
-            }),
-          })
-        )
+            html,
+          });
+        })
       );
 
       for (const r of results) {
