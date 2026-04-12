@@ -44,7 +44,7 @@ async function sendBrevoEmail(
   }
 }
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
     const authHeader = req.headers.get("authorization");
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
