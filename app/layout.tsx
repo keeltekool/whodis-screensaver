@@ -17,6 +17,13 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "WHO DIS? — The Collection",
   description: "49 icons. 5 decades. Zero apologies.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({
