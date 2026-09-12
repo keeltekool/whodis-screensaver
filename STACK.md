@@ -1,7 +1,7 @@
 # WHO DIS? — The Wall (Screensaver) — STACK.md
 
 > Branded hub + fullscreen celebrity photo screensaver. Gateway to the WHO DIS? experience collection.
-> Last updated: 2026-04-05
+> Last updated: 2026-09-12
 
 ## Services
 
@@ -12,7 +12,7 @@
 | Resend | Bi-weekly newsletter (3 rotating editions: deathmatch, spotlight, trivia) | `RESEND_API_KEY` |
 | Vercel | Hosting (Next.js 16) + Cron (1st & 15th, 7AM UTC) | — |
 
-Env vars stored in: Vercel (6 vars), `.env.local` (local dev)
+Env vars stored in: Vercel (5 vars — BREVO removed 2026-09-12), `.env.local` (local dev)
 
 ## Brand
 
@@ -44,4 +44,4 @@ vercel --prod           # production deploy
 2. Click "LAUNCH" → screensaver starts, photos load from R2
 3. Open settings (gear icon) → change duration, verify it takes effect
 4. Check console — no JS errors, no failed network requests
-5. **Daily email:** Trigger manually: `GET /api/daily/send` with `Authorization: Bearer <CRON_SECRET>` — must return `{ sent: N }` with `errors: 0`
+5. **Bi-weekly email:** Trigger manually: `GET /api/daily/send` with `Authorization: Bearer <CRON_SECRET>` — must return `{ sent: N, edition: "<type>" }` with `errors: 0`
