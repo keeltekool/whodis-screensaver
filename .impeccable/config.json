@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "createdAt": "2026-09-12T17:16:33.534Z",
+        "reason": "HTML email template — custom fonts not loadable in email clients, system fonts are the only viable option"
+      }
+    ]
+  }
+}

@@ -9,10 +9,10 @@
 |---------|---------|------------|
 | Neon Postgres | Celebrity metadata (shared DB with WHO DIS? game, read-only) | `DATABASE_URL` |
 | Cloudflare R2 | Photo CDN (shared `who-dis` bucket, read-only) | `NEXT_PUBLIC_R2_PUBLIC_URL` |
-| Brevo | Daily newsletter email delivery (free: 300/day) | `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` |
-| Vercel | Hosting (Next.js 16) + Cron (daily 7AM UTC) | — |
+| Resend | Bi-weekly newsletter (3 rotating editions: deathmatch, spotlight, trivia) | `RESEND_API_KEY` |
+| Vercel | Hosting (Next.js 16) + Cron (1st & 15th, 7AM UTC) | — |
 
-Env vars stored in: Vercel (4 vars), `.env.local` (local dev)
+Env vars stored in: Vercel (6 vars), `.env.local` (local dev)
 
 ## Brand
 
@@ -27,6 +27,7 @@ Same Neo-Noir design system as WHO DIS? game:
 
 | Issue | Fix |
 |-------|-----|
+| **Vercel cron sends GET, not POST** | Cron route handlers MUST export `GET`. POST = silent 405 failure. |
 | Neon `channel_binding=require` fails on Vercel | Use `sslmode=require` only in DATABASE_URL |
 | Vercel env vars get trailing `\n` from shell | Use `printf` piped to `vercel env add` |
 
@@ -43,3 +44,4 @@ vercel --prod           # production deploy
 2. Click "LAUNCH" → screensaver starts, photos load from R2
 3. Open settings (gear icon) → change duration, verify it takes effect
 4. Check console — no JS errors, no failed network requests
+5. **Daily email:** Trigger manually: `GET /api/daily/send` with `Authorization: Bearer <CRON_SECRET>` — must return `{ sent: N }` with `errors: 0`
